@@ -47,7 +47,7 @@ ifgs=textscan(fid,'%s');
 fclose(fid);
 ifgs=ifgs{1}(2:end);
 nb=length(ifgs{1});
-master_day=str2num(ifgs{1}(nb-21:nb-14));
+master_day=str2num(ifgs{1}(nb-27:nb-10));
 n_ifg=length(ifgs);
 n_image=n_ifg;
 day=zeros(n_ifg,1);
@@ -120,7 +120,7 @@ for i=1:n_ifg
 end
 
 bperp=mean(bperp_mat)';
-if master_master_flag==1
+if (master_master_flag==1) || (master_master_flag=='1')
     bperp_mat=bperp_mat(:,[1:master_ix-1,master_ix+1:end]);
 else
     bperp=[bperp(1:master_ix-1);0;bperp(master_ix:end)];
@@ -142,7 +142,7 @@ end
 
 zero_ph=sum(ph==0,2);
 nonzero_ix=zero_ph<=1;       % if more than 1 phase is zero, drop node
-if master_master_flag==1
+if (master_master_flag==1) || (master_master_flag=='1')
     ph(:,master_ix)=1;
 else
     ph=[ph(:,1:master_ix-1),ones(n_ps,1),ph(:,master_ix:end)];
